@@ -6,13 +6,13 @@ class UserModel(db.Model):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(15))
-    full_name = db.Column(db.String(20))
-    address = db.Column(db.String(50))
-    phone = db.Column(db.String(15))
-    email = db.Column(db.String(20))
-    password = db.Column(db.String(10))
-    is_driver = db.Column(db.String(10))
+    username = db.Column(db.String(80))
+    full_name = db.Column(db.String(80))
+    address = db.Column(db.String(80))
+    phone = db.Column(db.String(80))
+    email = db.Column(db.String(80))
+    password = db.Column(db.String(80))
+    is_driver = db.Column(db.String(80))
 
     def __init__(self,  username, full_name, address, phone, email, password, is_driver):
         self.username = username
