@@ -17,26 +17,26 @@ _user_parser.add_argument('password',
 
 
 class UserRegister(Resource):
-    # _user_parser.add_argument('full_name',
-    #                           type=str,
-    #                           required=True,
-    #                           help='This field cannot be blank.')
-    # _user_parser.add_argument('address',
-    #                           type=str,
-    #                           required=True,
-    #                           help='This field cannot be blank.')
-    # _user_parser.add_argument('phone',
-    #                           type=str,
-    #                           required=True,
-    #                           help='This field cannot be blank.')
-    # _user_parser.add_argument('email',
-    #                           type=str,
-    #                           required=True,
-    #                           help='This field cannot be blank.')
-    # _user_parser.add_argument('is_driver',
-    #                           type=str,
-    #                           required=True,
-    #                           help='This field cannot be blank.')
+    _user_parser.add_argument('full_name',
+                              type=str,
+                              required=False,
+                              help='This field cannot be blank.')
+    _user_parser.add_argument('address',
+                              type=str,
+                              required=False,
+                              help='This field cannot be blank.')
+    _user_parser.add_argument('phone',
+                              type=str,
+                              required=False,
+                              help='This field cannot be blank.')
+    _user_parser.add_argument('email',
+                              type=str,
+                              required=False,
+                              help='This field cannot be blank.')
+    _user_parser.add_argument('is_driver',
+                              type=str,
+                              required=False,
+                              help='This field cannot be blank.')
 
     def post(self):
         data = _user_parser.parse_args()
