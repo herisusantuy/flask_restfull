@@ -1,5 +1,7 @@
 import os
 from flask import Flask
+import sys
+import logging
 from flask_restful import Api
 from flask_jwt import JWT
 
@@ -10,6 +12,8 @@ from resources.store import Store, StoreList
 
 
 app = Flask(__name__)
+app.logger.addHandler(logging.StreamHandler(sys.stdout))
+app.logger.setLevel(logging.ERROR)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(
     'DATABASE_URL', 'sqlite:///data.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
