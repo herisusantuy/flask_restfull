@@ -6,15 +6,40 @@ class UserModel(db.Model):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80))
-    password = db.Column(db.String(80))
+    username = db.Column(db.String(15))
+    full_name = db.Column(db.String(20))
+    address = db.Column(db.String(50))
+    phone = db.Column(db.String(15))
+    email = db.Column(db.String(20))
+    password = db.Column(db.String(10))
+    is_driver = db.Column(db.String(10))
 
-    def __init__(self,  username, password):
+    def __init__(self,  username, full_name, address, phone, email, password, is_driver):
         self.username = username
+        self.full_name = full_name
+        self.address = address
+        self.phone = phone
+        self.email = email
         self.password = password
+        self.is_driver = is_driver
+
+    def json(self):
+        return {
+            'id': self.id,
+            'username': self.username,
+            'full_name': self.full_name,
+            'address': self.address,
+            'phone': self.phone,
+            'email': self.email,
+            'is_driver': self.is_driver
+        }
 
     def save_to_db(self):
         db.session.add(self)
+        db.session.commit()
+
+    def delete_from_db(self):
+        db.session.delete(self)
         db.session.commit()
 
     @classmethod

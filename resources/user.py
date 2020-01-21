@@ -10,14 +10,33 @@ class UserRegister(Resource):
                         type=str,
                         required=True,
                         help='This field cannot be blank.')
+    parser.add_argument('full_name',
+                        type=str,
+                        required=True,
+                        help='This field cannot be blank.')
+    parser.add_argument('address',
+                        type=str,
+                        required=True,
+                        help='This field cannot be blank.')
+    parser.add_argument('phone',
+                        type=str,
+                        required=True,
+                        help='This field cannot be blank.')
+    parser.add_argument('email',
+                        type=str,
+                        required=True,
+                        help='This field cannot be blank.')
     parser.add_argument('password',
+                        type=str,
+                        required=True,
+                        help='This field cannot be blank.')
+    parser.add_argument('is_driver',
                         type=str,
                         required=True,
                         help='This field cannot be blank.')
 
     def post(self):
         data = UserRegister.parser.parse_args()
-
         if UserModel.find_by_username(data['username']):
             return {'message': 'A user with that username already exists'}, 400
 
@@ -25,3 +44,20 @@ class UserRegister(Resource):
         user.save_to_db()
 
         return {'message': 'User created succesfully.'}, 201
+
+
+class User(Resource):
+    @classmethod
+    def get(cls, user_id):
+        user = UserModel.find_by_id(user_id)
+        if not user:
+            return {'message': 'User not found.'}, 404
+        return user.json()
+
+    @classmethod
+    def delete(cls, user_id):
+        user = UserModel.find_by_id(user_id)
+        if not user:
+            return {'message': 'User not found.'}, 404
+        user.delete_from_db()
+        return {'message': 'User deleted.'}, 200
